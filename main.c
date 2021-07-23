@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <time.h>
 
 // heapsort.h ------------------------------------------------------------------
 /** ordena em ordem crescente um array de inteiros com n elementos*/
@@ -85,6 +86,9 @@ void swap(int *array, int i, int j)
 }
 
 // util.h ----------------------------------------------------------------------
+/** Testa se o heapsort se o heapsort está ordenando em ordem crescente */
+bool testHeapsort();
+
 /** Testa se os elementos do array de inteiros estão em ordem crescente */
 bool testAscendingOrder(int *array, int n);
 
@@ -106,7 +110,33 @@ int *generateRandomIntArray(
 void printIntArray(int *array, int n);
 
 // util.c ----------------------------------------------------------------------
-bool testAscendingOrder(int *array, int n) {
+/** Testa se o heapsort está ordenando em ordem crescente */
+bool testHeapsort()
+{
+    int size = 0;
+    int round = 0;
+    bool isOrdered = false;
+    int *array = NULL;
+
+    for (size = 0; size < 50; size+=5) {
+        array = generateRandomIntArray(array, size, 0, 1000, time(NULL));
+        if (array == NULL) {
+            printf("Não foi possível criar um array para a realização de testes");
+            exit(1);
+        }
+        for (round = 0; round < 5; round++) {
+            heapsort(array, size);
+            isOrdered = testAscendingOrder(array, size);
+            if (isOrdered == false) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool testAscendingOrder(int *array, int n)
+{
     if (array == NULL) {
         return false;
     }
