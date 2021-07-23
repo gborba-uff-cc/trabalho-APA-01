@@ -118,7 +118,7 @@ bool testHeapsort()
     bool isOrdered = false;
     int *array = NULL;
 
-    for (size = 0; size < 50; size+=5) {
+    for (size = 5; size < 50; size+=5) {
         array = generateRandomIntArray(array, size, 0, 1000, time(NULL));
         if (array == NULL) {
             printf("Não foi possível criar um array para a realização de testes");
