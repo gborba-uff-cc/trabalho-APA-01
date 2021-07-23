@@ -16,7 +16,7 @@ void deleteMax(int *array, int n) {
     // diminui o tamanho do heap
     n = n-2;
     // reorganiza o heap colocando a raiz na posição certa
-    bubbleDown(array, 1, n);
+    bubbleDown(array, 0, n);
     return;
 }
 
