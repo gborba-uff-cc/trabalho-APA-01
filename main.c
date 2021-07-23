@@ -18,7 +18,10 @@ void swap(int *array, int i, int j);
 
 void heapsort(int *array, int n)
 {
-    int i;
+    int i = 0;
+    if (array == NULL) {
+        return;
+    }
     heapify(array, n);
     for (i = n; i > 0; i--) {
         deleteMax(array, i);
@@ -28,7 +31,7 @@ void heapsort(int *array, int n)
 
 void heapify(int *array, int n)
 {
-    int i;
+    int i = 0;
     // desde o último até o primeiro elemento pai no heap
     for (i = (n-1)/2; i >= 0; i--) {
         // reorganiza o heap colocando o elemento atual na posição certa
@@ -42,7 +45,7 @@ void deleteMax(int *array, int n)
     // troca o primeiro e o útimo elemento de lugar
     swap(array, 0, n-1);
     // diminui o tamanho do heap
-    n = n-2;
+    n = n-1;
     // reorganiza o heap colocando a raiz na posição certa
     bubbleDown(array, 0, n);
     return;
@@ -50,9 +53,8 @@ void deleteMax(int *array, int n)
 
 void bubbleDown(int *array, int i, int n)
 {
-    int filho;
     // indice do primeiro filho (da esquerda)
-    filho = 2*i +1;
+    int filho = 2*i +1;
     // se filho não é ultimo elemento do array
     if (filho < n-1) {
         // se valor do filho da direita > valor do filho da esquerda
@@ -76,8 +78,7 @@ void bubbleDown(int *array, int i, int n)
 
 void swap(int *array, int i, int j)
 {
-    int temp;
-    temp = array[i];
+    int temp = array[i];
     array[i] = array[j];
     array[j] = temp;
     return;
@@ -120,6 +121,7 @@ bool testAscendingOrder(int *array, int n) {
             }
         }
     }
+    return true;
 }
 
 int *generateRandomIntArray(
@@ -162,15 +164,16 @@ int main(int argc, char const *argv[])
     int elemMaxValue = 1000;
     int arraySizes[] = {10, 20, 50, 100, 200, 500, 1000, 2000, 5000};
     int nArraySizes = sizeof(arraySizes)/sizeof(int);
-    int arraySize;
+    int arraySize = 0;
     int arraySeeds[] = {2000, 566, 30610, 134, 2001};
     int nArraySeeds = sizeof(arraySeeds)/sizeof(int);
-    int arraySeed;
+    int arraySeed = 0;
     int repetitionsPerArray = 5;
     int cpuElapsedTime = 0;
-    int a;
-    int b;
-    int c;
+    int a = 0;
+    int b = 0;
+    int c = 0;
+    bool isOrdered = false;
 
     // para cada um dos tamanhos de array
     for (a = 0; a < nArraySizes; a++) {
@@ -183,16 +186,12 @@ int main(int argc, char const *argv[])
                 array = generateRandomIntArray(
                     array, arraySize, elemMinValue, elemMaxValue, arraySeed);
                 if (array == NULL) {
-                    printf(
-                        "Abortando programa...\nNão foi possível gerar o array de tamanho %d com a seed %d.\n",
+                    printf("Abortando programa...\nNão foi possível gerar o array de tamanho %d com a seed %d.\n",
                         arraySize, arraySeed);
                     return 1;
                 }
-                printf("Array ANTES da ordenação\n");
-                printIntArray(array, arraySize);
                 heapsort(array, arraySize);
-                printf("Array DEPOIS da ordenação\n");
-                printIntArray(array, arraySize);
+
                 printf(
                     "Heapsort para o array de tamanho %d gerado com a seed %d levou %d para ser concluído.\n",
                     arraySize, arraySeed, cpuElapsedTime);
