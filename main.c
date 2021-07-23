@@ -82,9 +82,52 @@ void swap(int *array, int i, int j)
     return;
 }
 
-// -----------------------------------------------------------------------------
-int main(int argc, char const *argv[]) {
-    printf("Ola mundo");
+// main.c ----------------------------------------------------------------------
+int main(int argc, char const *argv[])
+{
+    int *array = NULL;
+    int elemMinValue = 0;
+    int elemMaxValue = 1000;
+    int arraySizes[] = {10, 20, 50, 100, 200, 500, 1000, 2000, 5000};
+    int nArraySizes = sizeof(arraySizes)/sizeof(int);
+    int arraySize;
+    int arraySeeds[] = {2000, 566, 30610, 134, 2001};
+    int nArraySeeds = sizeof(arraySeeds)/sizeof(int);
+    int arraySeed;
+    int repetitionsPerArray = 5;
+    int cpuElapsedTime = 0;
+    int a;
+    int b;
+    int c;
+
+    // para cada um dos tamanhos de array
+    for (a = 0; a < nArraySizes; a++) {
+        arraySize = arraySizes[a];
+        // para cada tamanho de array, gera um array usando uma das seeds
+        for (b = 0; b < nArraySeeds; b++) {
+            arraySeed = arraySeeds[b];
+            // realiza x repetições para cada par de tamanho e seed
+            for (c = 0; c < repetitionsPerArray; c++) {
+                array = generateRandomIntArray(
+                    array, arraySize, elemMinValue, elemMaxValue, arraySeed);
+                if (array == NULL) {
+                    printf(
+                        "Abortando programa...\nNão foi possível gerar o array de tamanho %d com a seed %d.\n",
+                        arraySize, arraySeed);
+                    return 1;
+                }
+                printf("Array ANTES da ordenação\n");
+                printIntArray(array, arraySize);
+                heapsort(array, arraySize);
+                printf("Array DEPOIS da ordenação\n");
+                printIntArray(array, arraySize);
+                printf(
+                    "Heapsort para o array de tamanho %d gerado com a seed %d levou %d para ser concluído.\n",
+                    arraySize, arraySeed, cpuElapsedTime);
+                printf("\n");
+            }
+        }
+    }
     return 0;
 }
 
