@@ -4,6 +4,8 @@
 // heapsort.h ------------------------------------------------------------------
 /** ordena em ordem crescente um array de inteiros com n elementos*/
 void heapsort(int *array, int n);
+
+// heapsort.c ------------------------------------------------------------------
 /** monta completamente um heap a partir de um array */
 void heapify(int *array, int n);
 /** "remove" a raiz do heap e o reorganiza elegendo uma nova raiz */
@@ -13,7 +15,6 @@ void bubbleDown(int *array, int i, int n);
 /** troca o elemento na posição i com o elemento na posição j */
 void swap(int *array, int i, int j);
 
-// heapsort.c ------------------------------------------------------------------
 void heapsort(int *array, int n)
 {
     int i;
