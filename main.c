@@ -189,6 +189,12 @@ void printIntArray(int *array, int n)
 // main.c ----------------------------------------------------------------------
 int main(int argc, char const *argv[])
 {
+    printf(
+        testHeapsort() 
+        ? "Teste do Heapsort: Sucesso\n" 
+        : "Teste do Heapsort: Falhou\n");
+    printf("\n");
+
     int *array = NULL;
     int elemMinValue = 0;
     int elemMaxValue = 1000;
@@ -231,4 +237,3 @@ int main(int argc, char const *argv[])
     }
     return 0;
 }
-
