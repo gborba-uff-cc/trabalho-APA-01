@@ -9,6 +9,17 @@ void bubbleDown(int *array, int i, int n);
 void swap(int *array, int i, int j);
 
 // heapsort.c ------------------------------------------------------------------
+//* "remove" a raiz do heap e o reorganiza elegendo uma nova raiz */
+void deleteMax(int *array, int n) {
+    // troca o primeiro e o útimo elemento de lugar
+    swap(array, 0, n-1);
+    // diminui o tamanho do heap
+    n = n-2;
+    // reorganiza o heap colocando a raiz na posição certa
+    bubbleDown(array, 1, n);
+    return;
+}
+
 /** encontra a posição correta para o valor atualmente em i */
 void bubbleDown(int *array, int i, int n) {
     int filho;
