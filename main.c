@@ -1,16 +1,21 @@
-#include <stdio.h>;
-#include <stdlib.h>;
+#include <stdio.h>
+#include <stdlib.h>
 
 // heapsort.h ------------------------------------------------------------------
+/** ordena em ordem crescente um array de inteiros com n elementos*/
 void heapsort(int *array, int n);
+/** monta completamente um heap a partir de um array */
 void heapify(int *array, int n);
+/** "remove" a raiz do heap e o reorganiza elegendo uma nova raiz */
 void deleteMax(int *array, int n);
+/** encontra a posição correta para o valor atualmente em i */
 void bubbleDown(int *array, int i, int n);
+/** troca o elemento na posição i com o elemento na posição j */
 void swap(int *array, int i, int j);
 
 // heapsort.c ------------------------------------------------------------------
-/** ordena em ordem crescente um array de inteiros com n elementos*/
-void heapsort(int *array, int n) {
+void heapsort(int *array, int n)
+{
     int i;
     heapify(array, n);
     for (i = n; i > 0; i--) {
@@ -19,8 +24,8 @@ void heapsort(int *array, int n) {
     return;
 }
 
-//* monta completamente um heap a partir de um array */
-void heapify(int *array, int n) {
+void heapify(int *array, int n)
+{
     int i;
     // desde o último até o primeiro elemento pai no heap
     for (i = (n-1)/2; i >= 0; i--) {
@@ -30,8 +35,8 @@ void heapify(int *array, int n) {
     return;
 }
 
-//* "remove" a raiz do heap e o reorganiza elegendo uma nova raiz */
-void deleteMax(int *array, int n) {
+void deleteMax(int *array, int n)
+{
     // troca o primeiro e o útimo elemento de lugar
     swap(array, 0, n-1);
     // diminui o tamanho do heap
@@ -41,8 +46,8 @@ void deleteMax(int *array, int n) {
     return;
 }
 
-/** encontra a posição correta para o valor atualmente em i */
-void bubbleDown(int *array, int i, int n) {
+void bubbleDown(int *array, int i, int n)
+{
     int filho;
     // indice do primeiro filho (da esquerda)
     filho = 2*i +1;
@@ -67,8 +72,8 @@ void bubbleDown(int *array, int i, int n) {
     return;
 }
 
-//* troca o elemento na posição i com o elemento na posição j */
-void swap(int *array, int i, int j) {
+void swap(int *array, int i, int j)
+{
     int temp;
     temp = array[i];
     array[i] = array[j];
