@@ -9,6 +9,16 @@ void bubbleDown(int *array, int i, int n);
 void swap(int *array, int i, int j);
 
 // heapsort.c ------------------------------------------------------------------
+/** ordena em ordem crescente um array de inteiros com n elementos*/
+void heapsort(int *array, int n) {
+    int i;
+    heapify(array, n);
+    for (i = n; i > 0; i--) {
+        deleteMax(array, i);
+    }
+    return;
+}
+
 //* monta completamente um heap a partir de um array */
 void heapify(int *array, int n) {
     int i;
