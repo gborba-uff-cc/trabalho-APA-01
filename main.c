@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 // heapsort.h ------------------------------------------------------------------
 /** ordena em ordem crescente um array de inteiros com n elementos*/
@@ -80,6 +81,77 @@ void swap(int *array, int i, int j)
     array[i] = array[j];
     array[j] = temp;
     return;
+}
+
+// util.h ----------------------------------------------------------------------
+/** Testa se os elementos do array de inteiros estão em ordem crescente */
+bool testAscendingOrder(int *array, int n);
+
+/** 
+ * Tenta gerar dinâmicamente um novo array com n inteiros.
+ *
+ * obs.: Deve testar se foi possível criar o novo array
+*/
+int *generateRandomIntArray(
+    int *array, int newArraySize, 
+    int lowerValue, int upperValue, 
+    unsigned int seed);
+
+/**
+ * Imprime no terminal os elementos de índice 0 até n do array de inteiros.
+ *
+ * obs.: imprime um elemento após o outro sem quebra de linha;
+ */
+void printIntArray(int *array, int n);
+
+// util.c ----------------------------------------------------------------------
+bool testAscendingOrder(int *array, int n) {
+    if (array == NULL) {
+        return false;
+    }
+    else if (n == 1) {
+        return true;
+    }
+    else {
+        int i;
+        for (i = 1; i < n-1; i++) {
+            if (array[i] > array[i+1]) {
+                return false;
+            }
+        }
+    }
+}
+
+int *generateRandomIntArray(
+    int *array, int newArraySize, 
+    int lowerValue, int upperValue, 
+    unsigned int seed)
+{
+    if (array != NULL) {
+        free(array);
+        array = NULL;
+    }
+    array = malloc(newArraySize*sizeof(int));
+    if (array == NULL) {
+        return array;
+    }
+    else {
+        srand(seed);
+        int i;
+        for (i = 0; i < newArraySize; i++) {
+            array[i]= (rand() % (upperValue - lowerValue + 1)) + lowerValue;
+        }
+    }
+    return array;
+}
+
+void printIntArray(int *array, int n)
+{
+    int i;
+    for (i = 0; i < n; i++)
+    {
+        printf(i < n-1 ? "%d " : "%d\n" , array[i]);
+    }
 }
 
 // main.c ----------------------------------------------------------------------
