@@ -285,31 +285,33 @@ void Tempo_CPU_Sistema(double *seg_CPU_total, double *seg_sistema_total)
 // main.c ----------------------------------------------------------------------
 int main(int argc, char const *argv[])
 {
+    // executa testes
     printf(
         testHeapsort() 
         ? "Teste do Heapsort: Sucesso\n" 
         : "Teste do Heapsort: Falhou\n");
-    printf("\n");
     printf(
         testOrdenacaoMetodoCaixas() 
         ? "Teste da ordenacao pelo método caixas: Sucesso\n" 
         : "Teste da ordenacao pelo método caixas: Falhou\n");
     printf("\n");
 
+    // -------------------------------------------------------------------------
+    const int elemMinValue = 0;
+    const int elemMaxValue = 1000;
+    const int arraySizes[] = {10, 20, 50, 100, 200, 500, 1000, 2000, 5000};
+    const int nArraySizes = sizeof(arraySizes)/sizeof(int);
+    const int arraySeeds[] = {2000, 566, 30610, 134, 2001};
+    const int nArraySeeds = sizeof(arraySeeds)/sizeof(int);
+    const int repetitionsPerArray = 1000; // deve ser maior que 0
+
     int *array = NULL;
-    int elemMinValue = 0;
-    int elemMaxValue = 1000;
-    int arraySizes[] = {10, 20, 50, 100, 200, 500, 1000, 2000, 5000};
-    int nArraySizes = sizeof(arraySizes)/sizeof(int);
     int arraySize = 0;
-    int arraySeeds[] = {2000, 566, 30610, 134, 2001};
-    int nArraySeeds = sizeof(arraySeeds)/sizeof(int);
     int arraySeed = 0;
-    int repetitionsPerArray = 1000; // deve ser maior que 0
     int a = 0;
     int b = 0;
     int c = 0;
-    bool isOrdered = false;
+
     double t_cpu_start = 0.0;
     double t_cpu_finish = 0.0;
     double dt_cpu = 0.0;
@@ -338,7 +340,7 @@ int main(int argc, char const *argv[])
                         arraySize, arraySeed);
                     exit(1);
                 }
-                // toma tempo de cpu e de kernel
+                // toma o tempo de cpu e de kernel
                 Tempo_CPU_Sistema(&t_cpu_start, &t_kernel_start);
                 heapsort(array, arraySize);
                 Tempo_CPU_Sistema(&t_cpu_finish, &t_kernel_finish);
@@ -359,7 +361,7 @@ int main(int argc, char const *argv[])
         dt_kernel_meanPerSize = dt_kernel_acc / (nArraySeeds * repetitionsPerArray);
 
         // apresenta tempos médios
-        printf("Heapsort para o array de tamanho: %d. (%d repetições realizadas)\n    Tempo médio total CPU: %f\n    Tempo médio total kernel: %f\n",
+        printf("Heapsort para o array de tamanho: %d. (%d arrays ordenados)\n    Tempo médio total CPU: %fs\n    Tempo médio total kernel: %fs\n",
             arraySize, nArraySeeds * repetitionsPerArray, 
             dt_cpu_meanPerSize, dt_kernel_meanPerSize);
         printf("\n");
