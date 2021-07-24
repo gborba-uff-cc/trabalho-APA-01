@@ -65,10 +65,16 @@ int main(int argc, char const *argv[])
                     exit(1);
                 }
 
+                // // apresenta array antes de ordenar
+                // printIntArray(array,arraySize);
+
                 // toma o tempo de cpu e de kernel
                 Tempo_CPU_Sistema(&t_cpu_start, &t_kernel_start);
                 ordenacaoMetodoCaixas(array, arraySize, elemMinValue, elemMaxValue);
                 Tempo_CPU_Sistema(&t_cpu_finish, &t_kernel_finish);
+
+                // // apresenta array depois de ordenado
+                // printIntArray(array,arraySize);
 
                 // computa o tempo de cpu
                 dt_cpu = t_cpu_finish - t_cpu_start;
