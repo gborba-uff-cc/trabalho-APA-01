@@ -87,7 +87,7 @@ void swap(int *array, int i, int j)
 }
 
 // util.h ----------------------------------------------------------------------
-/** Testa se o heapsort se o heapsort está ordenando em ordem crescente */
+/** Testa se o heapsort está ordenando em ordem crescente */
 bool testHeapsort();
 
 /** Testa se os elementos do array de inteiros estão em ordem crescente */
