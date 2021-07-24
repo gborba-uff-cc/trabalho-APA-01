@@ -224,36 +224,64 @@ int main(int argc, char const *argv[])
     int arraySeeds[] = {2000, 566, 30610, 134, 2001};
     int nArraySeeds = sizeof(arraySeeds)/sizeof(int);
     int arraySeed = 0;
-    int repetitionsPerArray = 5;
-    int cpuElapsedTime = 0;
+    int repetitionsPerArray = 1000; // deve ser maior que 0
     int a = 0;
     int b = 0;
     int c = 0;
     bool isOrdered = false;
+    double t_cpu_start = 0.0;
+    double t_cpu_finish = 0.0;
+    double dt_cpu = 0.0;
+    double dt_cpu_acc = 0.0;
+    double dt_cpu_meanPerSize = 0.0;
+    double t_kernel_start = 0.0;
+    double t_kernel_finish = 0.0;
+    double dt_kernel = 0.0;
+    double dt_kernel_acc = 0.0;
+    double dt_kernel_meanPerSize = 0.0;
 
     // para cada um dos tamanhos de array
     for (a = 0; a < nArraySizes; a++) {
         arraySize = arraySizes[a];
+        dt_cpu_acc = 0.0;
+        dt_kernel_acc = 0.0;
         // para cada tamanho de array, gera um array usando uma das seeds
         for (b = 0; b < nArraySeeds; b++) {
             arraySeed = arraySeeds[b];
-            // realiza x repetições para cada par de tamanho e seed
+            // realiza x repetições para cada par de tamanho e seed do array
             for (c = 0; c < repetitionsPerArray; c++) {
                 array = generateRandomIntArray(
                     array, arraySize, elemMinValue, elemMaxValue, arraySeed);
                 if (array == NULL) {
                     printf("Abortando programa...\nNão foi possível gerar o array de tamanho %d com a seed %d.\n",
                         arraySize, arraySeed);
-                    return 1;
+                    exit(1);
                 }
+                // toma tempo de cpu e de kernel
+                Tempo_CPU_Sistema(&t_cpu_start, &t_kernel_start);
                 heapsort(array, arraySize);
+                Tempo_CPU_Sistema(&t_cpu_finish, &t_kernel_finish);
 
-                printf(
-                    "Heapsort para o array de tamanho %d gerado com a seed %d levou %d para ser concluído.\n",
-                    arraySize, arraySeed, cpuElapsedTime);
-                printf("\n");
+                // computa o tempo de cpu
+                dt_cpu = t_cpu_finish - t_cpu_start;
+                dt_cpu_acc += dt_cpu;
+                dt_kernel = t_kernel_finish - t_kernel_start;
+                dt_kernel_acc += dt_kernel;
+
+                // // apresenta tempos parciais
+                // printf("Heapsort para o array de tamanho: %d, gerado com a seed: %d.\n    Tempo total CPU: %f\n    Tempo total kernel: %f\n",
+                //     arraySize, arraySeed, dt_cpu, dt_kernel);
+                // printf("\n");
             }
         }
+        dt_cpu_meanPerSize = dt_cpu_acc / (nArraySeeds * repetitionsPerArray);
+        dt_kernel_meanPerSize = dt_cpu_acc / (nArraySeeds * repetitionsPerArray);
+
+        // apresenta tempos médios
+        printf("Heapsort para o array de tamanho: %d. (%d repetições realizadas)\n    Tempo médio total CPU: %f\n    Tempo médio total kernel: %f\n",
+            arraySize, nArraySeeds * repetitionsPerArray, 
+            dt_cpu_meanPerSize, dt_kernel_meanPerSize);
+        printf("\n");
     }
     return 0;
 }
