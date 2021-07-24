@@ -167,7 +167,7 @@ int *generateRandomIntArray(
         free(array);
         array = NULL;
     }
-    array = malloc(newArraySize*sizeof(int));
+    array = (int *) malloc(sizeof(int) * newArraySize);
     if (array == NULL) {
         return array;
     }
