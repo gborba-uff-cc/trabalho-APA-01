@@ -29,7 +29,7 @@ void ordenacaoMetodoCaixas(int *array, int n, int minValue, int maxValue)
         // enquanto a caixa não estiver vazia
         while (caixas[i] != 0) {
             // coloca o elemento na posição correta
-            array[j] = j +minValue;
+            array[j] = i +minValue;
             // diminui a contagem da caixa
             caixas[i] = caixas[i] -1;
             // avança uma posição no array
