@@ -290,6 +290,11 @@ int main(int argc, char const *argv[])
         ? "Teste do Heapsort: Sucesso\n" 
         : "Teste do Heapsort: Falhou\n");
     printf("\n");
+    printf(
+        testOrdenacaoMetodoCaixas() 
+        ? "Teste da ordenacao pelo método caixas: Sucesso\n" 
+        : "Teste da ordenacao pelo método caixas: Falhou\n");
+    printf("\n");
 
     int *array = NULL;
     int elemMinValue = 0;
