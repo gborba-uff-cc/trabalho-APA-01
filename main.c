@@ -342,7 +342,8 @@ int main(int argc, char const *argv[])
                 }
                 // toma o tempo de cpu e de kernel
                 Tempo_CPU_Sistema(&t_cpu_start, &t_kernel_start);
-                heapsort(array, arraySize);
+                // heapsort(array, arraySize);
+                ordenacaoMetodoCaixas(array, arraySize, elemMinValue, elemMaxValue);
                 Tempo_CPU_Sistema(&t_cpu_finish, &t_kernel_finish);
 
                 // computa o tempo de cpu
@@ -357,11 +358,15 @@ int main(int argc, char const *argv[])
                 // printf("\n");
             }
         }
+        // computa as médias para cada tamanho de array
         dt_cpu_meanPerSize = dt_cpu_acc / (nArraySeeds * repetitionsPerArray);
         dt_kernel_meanPerSize = dt_kernel_acc / (nArraySeeds * repetitionsPerArray);
 
         // apresenta tempos médios
-        printf("Heapsort para o array de tamanho: %d. (%d arrays ordenados)\n    Tempo médio total CPU: %fs\n    Tempo médio total kernel: %fs\n",
+        // printf("Heapsort para o array de tamanho: %d. (%d arrays ordenados)\n    Tempo médio total CPU: %fs\n    Tempo médio total kernel: %fs\n",
+        //     arraySize, nArraySeeds * repetitionsPerArray, 
+        //     dt_cpu_meanPerSize, dt_kernel_meanPerSize);
+        printf("Método das caixas para o array de tamanho: %d. (%d arrays ordenados)\n    Tempo médio total CPU: %fs\n    Tempo médio total kernel: %fs\n",
             arraySize, nArraySeeds * repetitionsPerArray, 
             dt_cpu_meanPerSize, dt_kernel_meanPerSize);
         printf("\n");
