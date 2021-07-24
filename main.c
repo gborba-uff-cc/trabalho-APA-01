@@ -356,7 +356,7 @@ int main(int argc, char const *argv[])
             }
         }
         dt_cpu_meanPerSize = dt_cpu_acc / (nArraySeeds * repetitionsPerArray);
-        dt_kernel_meanPerSize = dt_cpu_acc / (nArraySeeds * repetitionsPerArray);
+        dt_kernel_meanPerSize = dt_kernel_acc / (nArraySeeds * repetitionsPerArray);
 
         // apresenta tempos médios
         printf("Heapsort para o array de tamanho: %d. (%d repetições realizadas)\n    Tempo médio total CPU: %f\n    Tempo médio total kernel: %f\n",
