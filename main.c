@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
+#include <sys/resource.h>
 
 // heapsort.h ------------------------------------------------------------------
 /** ordena em ordem crescente um array de inteiros com n elementos*/
@@ -109,6 +110,9 @@ int *generateRandomIntArray(
  */
 void printIntArray(int *array, int n);
 
+/** função auxiliar que nos foi fornecida para calcular o tempo de CPU */
+void Tempo_CPU_Sistema(double *seg_CPU_total, double *seg_sistema_total);
+
 // util.c ----------------------------------------------------------------------
 /** Testa se o heapsort está ordenando em ordem crescente */
 bool testHeapsort()
@@ -184,6 +188,22 @@ void printIntArray(int *array, int n)
     {
         printf(i < n-1 ? "%d " : "%d\n" , array[i]);
     }
+}
+
+void Tempo_CPU_Sistema(double *seg_CPU_total, double *seg_sistema_total)
+{
+    long seg_CPU, seg_sistema, mseg_CPU, mseg_sistema;
+    struct rusage ptempo;
+
+    getrusage(0,&ptempo);
+
+    seg_CPU = ptempo.ru_utime.tv_sec;
+    mseg_CPU = ptempo.ru_utime.tv_usec;
+    seg_sistema = ptempo.ru_stime.tv_sec;
+    mseg_sistema = ptempo.ru_stime.tv_usec;
+
+    *seg_CPU_total     = (seg_CPU + 0.000001 * mseg_CPU);
+    *seg_sistema_total = (seg_sistema + 0.000001 * mseg_sistema);
 }
 
 // main.c ----------------------------------------------------------------------
