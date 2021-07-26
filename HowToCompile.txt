@@ -8,8 +8,10 @@ Passos para compilar os programas usando o gcc no teminal linux
     (se copiar linha a linha, então copie tudo exceto as linhas com '---' e a última linha em branco)
     (se copiar o bloco então, copie tudo, incluindo a última linha em branco, exceto as linhas com '---')
 --------------------
-mkdir objects
 mkdir bin
+mkdir objects
+mkdir generatedArrays
+mkdir results
 gcc src/heapsort.c -o objects/heapsort.o -c
 gcc src/ordenacaoMetodoCaixas.c -o objects/ordenacaoMetodoCaixas.o -c
 gcc src/tests.c -o objects/tests.o -c
