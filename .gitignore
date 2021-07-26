@@ -1,3 +1,5 @@
 .vscode/
 objects/
 bin/
+generatedArrays/
+results/
