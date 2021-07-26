@@ -70,3 +70,52 @@ void persistIntArray(char *fileName, int *array, int n, int elemMinValue, int el
 
     fclose(fp);
 }
+
+int *readIntArrayFromFile(char *filename, int *array, int *n, int *elemMinValue, int *elemMaxValue)
+{
+    FILE *fp = NULL;
+    char buffer[50];
+    int numRead = 0;
+    int newArraySize = 0;
+    int minValue = 0;
+    int maxValue = 0;
+    int i = 0;
+
+    // abre o arquivo
+    fp = fopen(filename, "r");
+    if (fp == NULL) {
+        return NULL;
+    }
+
+    // lê o tamanho, o valor mínimo e valor máximo dos elementos do array
+    if (fgets(buffer, sizeof(buffer), fp) != 0) {
+        sscanf(buffer, "%d %d %d", &newArraySize, &minValue, &maxValue);
+    } else {
+        return NULL;
+    }
+
+    // cria novo array
+    if (array != NULL) {
+        free(array);
+    }
+    array = (int *) malloc(sizeof(int) * newArraySize);
+    if (array == NULL) {
+        return array;
+    }
+
+    // popula o array
+    i = 0;
+    while (fgets(buffer, sizeof(buffer), fp) != 0) {
+        sscanf(buffer, "%d", &numRead);
+        array[i] = numRead;
+        ++i;
+    }
+
+    // fecha o arquivo
+    fclose(fp);
+
+    *n = newArraySize;
+    *elemMinValue = minValue;
+    *elemMaxValue = maxValue;
+    return array;
+}

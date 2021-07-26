@@ -24,4 +24,13 @@ void Tempo_CPU_Sistema(double *seg_CPU_total, double *seg_sistema_total);
 /** Persiste um array de inteiros em um arquivo */
 void persistIntArray(char *fileName, int *array, int n, int elemMinValue, int elemMaxValue);
 
+/**
+ * Lê o array que foi salvo com a função persistIntArray.
+ *
+ * Retorna um ponteiro para o array lido ou NULL caso não seja possível ler o array do arquivo.
+ *
+ * Atualiza os valores de n, elemMinValue e elemMaxValue caso o array tenha sido lido;
+ */
+int *readIntArrayFromFile(char *filename, int *array, int *n, int *elemMinValue, int *elemMaxValue);
+
 #endif
