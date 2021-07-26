@@ -20,6 +20,7 @@ int main(int argc, char const *argv[])
 
     char fileName[100];
     int arraysCount = 0;
+    time_t startTime = time(NULL);
 
     int i = 0;
     for (arraySize = arraySizeMinimum; arraySize < arraySizeMaximum; arraySize += arraySizeStep) {
@@ -32,7 +33,7 @@ int main(int argc, char const *argv[])
             }
             ++arraysCount;
 
-            sprintf(fileName, "./generatedArrays/%d.txt", arraysCount);
+            sprintf(fileName, "./generatedArrays/%ld-%d.txt", startTime, arraysCount);
             persistIntArray(fileName, array, arraySize, elemMinValue, elemMaxValue);
         }
     }
