@@ -52,3 +52,21 @@ void Tempo_CPU_Sistema(double *seg_CPU_total, double *seg_sistema_total)
     *seg_CPU_total     = (seg_CPU + 0.000001 * mseg_CPU);
     *seg_sistema_total = (seg_sistema + 0.000001 * mseg_sistema);
 }
+
+void persistIntArray(char *fileName, int *array, int n, int elemMinValue, int elemMaxValue)
+{
+    FILE *fp;
+    int i;
+
+    fp = fopen(fileName, "w");
+    if (fp == NULL) {
+        return;
+    }
+
+    fprintf(fp, "%d %d %d\n", n, elemMinValue, elemMaxValue);
+    for (i = 0; i < n; ++i) {
+        fprintf(fp, i < (n-1) ? "%d\n" : "%d", array[i]);
+    }
+
+    fclose(fp);
+}

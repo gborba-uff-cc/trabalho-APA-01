@@ -21,4 +21,7 @@ void printIntArray(int *array, int n);
 /** função auxiliar que nos foi fornecida para calcular o tempo de CPU */
 void Tempo_CPU_Sistema(double *seg_CPU_total, double *seg_sistema_total);
 
+/** Persiste um array de inteiros em um arquivo */
+void persistIntArray(char *fileName, int *array, int n, int elemMinValue, int elemMaxValue);
+
 #endif
