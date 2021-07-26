@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
+#include <time.h>
 
 #include "ordenacaoMetodoCaixas.h"
 #include "tests.h"
@@ -23,16 +25,19 @@ int main(int argc, char const *argv[])
     // -------------------------------------------------------------------------
     const int elemMinValue = 0;
     const int elemMaxValue = 1000;
-    const int arraySizes[] = {10, 20, 50, 100, 200, 500, 1000, 2000, 5000};
-    const int nArraySizes = sizeof(arraySizes)/sizeof(int);
+    // const int arraySizes[] = {10, 20, 50, 100, 200, 500, 1000, 2000, 5000};
+    // const int nArraySizes = sizeof(arraySizes)/sizeof(int);
+    const int arraySizeStep = 500;
+    const int arraySizeMinimum = arraySizeStep;
+    const int arraySizeMaximum = INT_MAX - arraySizeStep;
     const int arraySeeds[] = {2000, 566, 30610, 134, 2001};
     const int nArraySeeds = sizeof(arraySeeds)/sizeof(int);
-    const int repetitionsPerArray = 1000; // deve ser maior que 0
+    const int repetitionsPerArray = 2; // deve ser maior que 0
 
     int *array = NULL;
     int arraySize = 0;
     int arraySeed = 0;
-    int a = 0;
+    // int a = 0;
     int b = 0;
     int c = 0;
 
@@ -47,9 +52,16 @@ int main(int argc, char const *argv[])
     double dt_kernel_acc = 0.0;
     double dt_kernel_meanPerSize = 0.0;
 
+    // cria o arquivo de saída com as médias
+    FILE *fp = NULL;
+    char outputFilename[50];
+    sprintf(outputFilename, "./results/meansCaixas-%ld.dat", time(NULL));
+    fp = fopen(outputFilename, "a");
+
     // para cada um dos tamanhos de array
-    for (a = 0; a < nArraySizes; a++) {
-        arraySize = arraySizes[a];
+    // for (a = 0; a < nArraySizes; a++) {
+    //     arraySize = arraySizes[a];
+    for (arraySize = arraySizeMinimum; arraySize < arraySizeMaximum; arraySize += arraySizeStep) {
         dt_cpu_acc = 0.0;
         dt_kernel_acc = 0.0;
         // para cada tamanho de array, gera um array usando uma das seeds
@@ -93,10 +105,21 @@ int main(int argc, char const *argv[])
         dt_kernel_meanPerSize = dt_kernel_acc / (nArraySeeds * repetitionsPerArray);
 
         // apresenta tempos médios
-        printf("Método das caixas para o array de tamanho: %d. (%d arrays ordenados)\n    Tempo médio total CPU: %fs\n    Tempo médio total kernel: %fs\n",
+        printf("Método das caixas para o array de tamanho: %d. (%d arrays ordenados)\n    Tempo médio total CPU: %lfs\n    Tempo médio total kernel: %lfs\n",
             arraySize, nArraySeeds * repetitionsPerArray, 
             dt_cpu_meanPerSize, dt_kernel_meanPerSize);
         printf("\n");
+
+        // armazena médias no arquivo
+        if (fp != NULL) {
+            // armazena um par "arraySize dt_cpu_meanPerSize" em cada linha do arquivo
+            fprintf(fp,"%d\t%lf\n", arraySize, dt_cpu_meanPerSize);
+            fflush(fp);
+        }
+    }
+
+    if (fp != NULL) {
+        fclose(fp);
     }
     return 0;
 }
