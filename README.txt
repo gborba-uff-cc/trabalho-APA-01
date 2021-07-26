@@ -16,9 +16,11 @@ gcc src/tests.c -o objects/tests.o -c
 gcc src/util.c -o objects/util.o -c
 gcc src/mainTempoCpuCaixas.c -o objects/mainTempoCpuCaixas.o -c
 gcc src/mainTempoCpuHeapsort.c -o objects/mainTempoCpuHeapsort.o -c
+gcc src/mainGeradorArrays.c -o objects/mainGeradorArrays.o -c
 cd objects
 gcc -o ../bin/tempoCpuCaixas mainTempoCpuCaixas.o heapsort.o ordenacaoMetodoCaixas.o tests.o util.o
 gcc -o ../bin/tempoCpuHeapsort mainTempoCpuHeapsort.o heapsort.o ordenacaoMetodoCaixas.o tests.o util.o
+gcc -o ../bin/geradorArrays mainGeradorArrays.o util.o
 cd ..
 
 --------------------
