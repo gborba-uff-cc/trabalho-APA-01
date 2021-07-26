@@ -13,7 +13,6 @@ int main(int argc, char const *argv[])
     const int arraySizeMaximum = INT_MAX - arraySizeStep;
     const int arraySeeds[] = {2000, 566, 30610, 134, 2001};
     const int nArraySeeds = sizeof(arraySeeds)/sizeof(int);
-    // const int nArraySeeds = 5;
 
     int *array = NULL;
     int arraySize = 5;

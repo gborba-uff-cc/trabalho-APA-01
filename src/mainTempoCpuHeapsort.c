@@ -25,8 +25,6 @@ int main(int argc, char const *argv[])
     // -------------------------------------------------------------------------
     const int elemMinValue = 0;
     const int elemMaxValue = 1000;
-    // const int arraySizes[] = {10, 20, 50, 100, 200, 500, 1000, 2000, 5000};
-    // const int nArraySizes = sizeof(arraySizes)/sizeof(int);
     const int arraySizeStep = 500;
     const int arraySizeMinimum = arraySizeStep;
     const int arraySizeMaximum = INT_MAX - arraySizeStep;
@@ -37,7 +35,6 @@ int main(int argc, char const *argv[])
     int *array = NULL;
     int arraySize = 0;
     int arraySeed = 0;
-    // int a = 0;
     int b = 0;
     int c = 0;
 
@@ -59,8 +56,6 @@ int main(int argc, char const *argv[])
     fp = fopen(outputFilename, "a");
 
     // para cada um dos tamanhos de array
-    // for (a = 0; a < nArraySizes; a++) {
-    //     arraySize = arraySizes[a];
     for (arraySize = arraySizeMinimum; arraySize < arraySizeMaximum; arraySize += arraySizeStep) {
         dt_cpu_acc = 0.0;
         dt_kernel_acc = 0.0;
@@ -118,7 +113,7 @@ int main(int argc, char const *argv[])
         }
     }
 
-        if (fp != NULL) {
+    if (fp != NULL) {
         fclose(fp);
     }
     return 0;
