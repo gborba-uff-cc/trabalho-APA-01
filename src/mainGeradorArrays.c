@@ -28,7 +28,7 @@ int main(int argc, char const *argv[])
     char todayDate[20];
 
     int i = 0;
-    for (arraySize = arraySizeMinimum; arraySize < arraySizeMaximum; arraySize += arraySizeStep) {
+    for (arraySize = arraySizeMinimum; arraySize <= arraySizeMaximum; arraySize += arraySizeStep) {
         for (i = 0; i < nArraySeeds; i++) {
             arraySeed = arraySeeds[i];
             array = generateRandomIntArray(array, arraySize, elemMinValue, maxValue, arraySeed);

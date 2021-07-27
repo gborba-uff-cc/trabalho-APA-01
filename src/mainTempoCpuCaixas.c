@@ -63,7 +63,7 @@ int main(int argc, char const *argv[])
     fp = fopen(outputFilename, "a");
 
     // para cada um dos tamanhos de array
-    for (arraySize = arraySizeMinimum; arraySize < arraySizeMaximum; arraySize += arraySizeStep) {
+    for (arraySize = arraySizeMinimum; arraySize <= arraySizeMaximum; arraySize += arraySizeStep) {
         maxValue = arraySize;
         dt_cpu_acc = 0.0;
         dt_kernel_acc = 0.0;
