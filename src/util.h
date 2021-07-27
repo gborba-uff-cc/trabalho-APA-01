@@ -33,4 +33,12 @@ void persistIntArray(char *fileName, int *array, int n, int elemMinValue, int el
  */
 int *readIntArrayFromFile(char *filename, int *array, int *n, int *elemMinValue, int *elemMaxValue);
 
+/**
+ * Gerar uma string que representa o tempo.
+ *
+ * Buffer de entrada deve ser maior que 19 characteres
+ * Formato de saída: YYYY-MM-DD_HH-MM-SS
+ */
+char getStrDateTime(char *buffer, time_t *time);
+
 #endif

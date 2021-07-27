@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <sys/resource.h>
+#include <time.h>
 
 #include "util.h"
 
@@ -118,4 +119,12 @@ int *readIntArrayFromFile(char *filename, int *array, int *n, int *elemMinValue,
     *elemMinValue = minValue;
     *elemMaxValue = maxValue;
     return array;
+}
+
+char getStrDateTime(char *buffer, time_t *time)
+{
+    if (buffer == NULL) {
+        return;
+    }
+    strftime(buffer, 20, "%Y-%m-%d_%H-%M-%S", localtime(time));
 }
