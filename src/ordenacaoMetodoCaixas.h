@@ -8,6 +8,6 @@
  * obs.: A ordenação é feita usando o método das caixas (método das caixas é um 
  * caso particular do bucket sort);
  */
-void ordenacaoMetodoCaixas();
+void ordenacaoMetodoCaixas(int *array, int n, int minValue, int maxValue);
 
 #endif
