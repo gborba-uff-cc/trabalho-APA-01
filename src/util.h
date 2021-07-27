@@ -55,4 +55,14 @@ void getStrDateTime(char *buffer, time_t *time);
  */
 bool getParamsFromArgs(int argc, char const *argv[], int *nMin, int *nMax, int *nStep, int *elemMinValue, int *elemMaxValue);
 
+/** 
+ * Interage com o usuário e recupera os valores para tamanho mínimo, tamanho
+ * máximo, tamanho do passo, valor mínimo e valor máximo dos elementos.
+ *
+ * Retorna true caso tenha conseguido recuperar os valores, caso contrário false.
+ *
+ * Obs.: Valores recuperados na ordem indicada.
+ */
+bool getParamsFromTerminal(int *nMin, int *nMax, int *nStep, int *elemMinValue, int *elemMaxValue);
+
 #endif

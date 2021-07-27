@@ -162,3 +162,56 @@ bool getParamsFromArgs(
     *elemMaxValue = maxVal;
     return true;
 }
+
+bool getParamsFromTerminal(
+    int *nMin, int *nMax, int *nStep,
+    int *elemMinValue, int *elemMaxValue)
+{
+    const int lineSize = 12;
+    char line [lineSize];
+    int min = 0;
+    int max = 0;
+    int step = 0;
+    int minVal = 0;
+    int maxVal = 0;
+    bool fail = 0;
+
+    fputs("Entre o tamanho mínimo dos arrays: ", stdout);
+    fgets(line, lineSize, stdin);
+    fail |= (sscanf(line, "%d", &min) != 1);
+    fputs("\n", stdout);
+
+    fputs("Entre o tamanho máximo dos arrays: ", stdout);
+    fgets(line, lineSize, stdin);
+    fail |= (sscanf(line, "%d", &max) != 1);
+    fputs("\n", stdout);
+
+    fputs("Entre o tamanho do passo: ", stdout);
+    fgets(line, lineSize, stdin);
+    fail |= (sscanf(line, "%d", &step) != 1);
+    fputs("\n", stdout);
+
+    fputs("Entre o valor mínimo dos elementos: ", stdout);
+    fgets(line, lineSize, stdin);
+    fail |= (sscanf(line, "%d", &minVal) != 1);
+    fputs("\n", stdout);
+
+    fputs("Entre o tamanho mínimo dos elementos: ", stdout);
+    fgets(line, lineSize, stdin);
+    fail |= (sscanf(line, "%d", &maxVal) != 1);
+    fputs("\n", stdout);
+
+    if (fail != false ) {
+        puts("Não será possivel criar os arrys com os argumentos fornecidos.");
+        puts("Ignorando valores fornecidos.");
+        fputs("\n", stdout);
+        return false;
+    }
+
+    *nMin = min;
+    *nMax = max;
+    *nStep = step;
+    *elemMinValue = minVal;
+    *elemMaxValue = maxVal;
+    return true;
+}
