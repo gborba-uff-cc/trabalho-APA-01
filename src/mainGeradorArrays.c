@@ -61,14 +61,25 @@ int main(int argc, char const *argv[])
     fputs("", stdout);
 
     int i = 0;
+    int arrayAttempts = 0;
     for (arraySize = arraySizeMinimum; arraySize <= arraySizeMaximum; arraySize += arraySizeStep) {
         maxValue = elemMaxValue;
         for (i = 0; i < nArraySeeds; i++) {
             arraySeed = arraySeeds[i];
             array = generateRandomIntArray(array, arraySize, elemMinValue, maxValue, arraySeed);
 
-            if (array == NULL) {
-                continue;
+            // if (array == NULL) {
+            //     continue;
+            // }
+            // faz +1000 tentativas de criar o array
+            arrayAttempts = 0;
+            while (array == NULL && arrayAttempts < 1000) {
+                array = generateRandomIntArray(array, arraySize, elemMinValue, maxValue, arraySeed);
+                ++arrayAttempts;
+            }
+            if (arrayAttempts == 1000) {
+                puts("Não é possível continuar a execução do programa por falta de memória");
+                return 1;
             }
             ++arraysCount;
 
