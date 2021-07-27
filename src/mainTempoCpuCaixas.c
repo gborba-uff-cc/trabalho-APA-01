@@ -69,6 +69,7 @@ int main(int argc, char const *argv[])
     valor máximo:     %d\n",
         arraySizeMinimum, arraySizeMaximum, arraySizeStep,
         elemMinValue, elemMaxValue);
+    fputs("", stdout);
 
     // executa teste -----------------------------------------------------------
     bool testSucceeded = testOrdenacaoMetodoCaixas();

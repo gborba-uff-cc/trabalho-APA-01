@@ -26,12 +26,13 @@ int main(int argc, char const *argv[])
     time_t startTime = time(NULL);
     char todayDate[20];
 
+    // interage com o usuario --------------------------------------------------
     bool paramsAreValids = true;
     // tenta pegar parametros via argumentos do programa
     if (getParamsFromArgs(argc, argv, &arraySizeMinimum, &arraySizeMaximum,
         &arraySizeStep, &elemMinValue, &elemMaxValue)) {
     }
-    // tenta pegar parametros do terminal, se não consegui via argumentos
+    // tenta pegar parametros do terminal, se não conseguiu via argumentos
     else if (getParamsFromTerminal(&arraySizeMinimum, &arraySizeMaximum,
         &arraySizeStep, &elemMinValue, &elemMaxValue)) {
     }
@@ -57,6 +58,7 @@ int main(int argc, char const *argv[])
     valor máximo:     %d\n",
         arraySizeMinimum, arraySizeMaximum, arraySizeStep,
         elemMinValue, elemMaxValue);
+    fputs("", stdout);
 
     int i = 0;
     for (arraySize = arraySizeMinimum; arraySize <= arraySizeMaximum; arraySize += arraySizeStep) {
