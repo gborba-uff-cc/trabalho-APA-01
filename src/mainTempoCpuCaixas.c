@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <time.h>
+#include <stdbool.h>
 
 #include "ordenacaoMetodoCaixas.h"
 #include "tests.h"
@@ -9,31 +10,14 @@
 
 int main(int argc, char const *argv[])
 {
-    // executa teste -----------------------------------------------------------
-    bool testSucceeded = testOrdenacaoMetodoCaixas();
-    printf(
-        testSucceeded 
-        ? "Teste da ordenacao pelo método caixas: Sucesso\n" 
-        : "Teste da ordenacao pelo método caixas: Falhou\n");
-    printf("\n");
-
-    if (testSucceeded == false) {
-        printf("Abortando programa...\nO algoritmo não passou no teste de ordenação.\n");
-        return 1;
-    }
-
-    // -------------------------------------------------------------------------
-    const int elemMinValue = 0;
-    const int elemMaxValue = 1000;
-    // const int arraySizeStep = 500;
-    // const int arraySizeMinimum = arraySizeStep;
-    // const int arraySizeMaximum = INT_MAX - arraySizeStep;
-    const int arraySizeStep = 100;
-    const int arraySizeMinimum = 1000;
-    const int arraySizeMaximum = 25000;
+    int elemMinValue = 0;
+    int elemMaxValue = 1000;
+    int arraySizeStep = 100;
+    int arraySizeMinimum = 1000;
+    int arraySizeMaximum = 25000;
     const int arraySeeds[] = {2000, 566, 30610, 134, 2001};
     const int nArraySeeds = sizeof(arraySeeds)/sizeof(int);
-    const int repetitionsPerArray = 2; // deve ser maior que 0
+    const int repetitionsPerArray = 1; // deve ser maior que 0
 
     int *array = NULL;
     int arraySize = 0;
@@ -53,6 +37,53 @@ int main(int argc, char const *argv[])
     double dt_kernel_acc = 0.0;
     double dt_kernel_meanPerSize = 0.0;
 
+    // interage com o usuário --------------------------------------------------
+    bool paramsAreValids = true;
+    // tenta pegar parametros via argumentos do programa
+    if (getParamsFromArgs(argc, argv, &arraySizeMinimum, &arraySizeMaximum,
+        &arraySizeStep, &elemMinValue, &elemMaxValue)) {
+    }
+    // tenta pegar parametros do terminal, se não consegui via argumentos
+    else if (getParamsFromTerminal(&arraySizeMinimum, &arraySizeMaximum,
+        &arraySizeStep, &elemMinValue, &elemMaxValue)) {
+    }
+    // usa valores padrão se não não ceonseguiu pegar parametros de outras formas
+    // faz validação parametros
+    paramsAreValids &= (0 <= arraySizeMinimum && arraySizeMinimum <= arraySizeMaximum);
+    paramsAreValids &= (0 <= arraySizeMaximum && arraySizeMaximum <= INT_MAX - 1);
+    paramsAreValids &= (INT_MIN <= arraySizeStep && arraySizeStep <= INT_MAX);
+    paramsAreValids &= (INT_MIN <= elemMinValue && elemMinValue <= INT_MAX);
+    paramsAreValids &= (INT_MIN <= elemMaxValue && elemMaxValue <= INT_MAX);
+    if (paramsAreValids == false) {
+        puts("Nenhum dos valores fornecidos são válidos");
+        return 1;
+    }
+
+    // apresenta os parametros que serão usados no programa
+    printf(
+"Valores que serão usados para gerar os arrays:\n\
+    tamanho mínimo:   %d\n\
+    tamanho máximo:   %d\n\
+    tamanho do passo: %d\n\
+    valor mínimo:     %d\n\
+    valor máximo:     %d\n",
+        arraySizeMinimum, arraySizeMaximum, arraySizeStep,
+        elemMinValue, elemMaxValue);
+
+    // executa teste -----------------------------------------------------------
+    bool testSucceeded = testOrdenacaoMetodoCaixas();
+    printf(
+        testSucceeded 
+        ? "Teste da ordenacao pelo método caixas: Sucesso\n" 
+        : "Teste da ordenacao pelo método caixas: Falhou\n");
+    printf("\n");
+
+    if (testSucceeded == false) {
+        printf("Abortando programa...\nO algoritmo não passou no teste de ordenação.\n");
+        return 1;
+    }
+
+    // Afere tempo de execução -------------------------------------------------
     // cria o arquivo de saída com as médias
     FILE *fp = NULL;
     char outputFilename[100];
