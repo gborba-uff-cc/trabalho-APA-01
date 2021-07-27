@@ -121,7 +121,7 @@ int *readIntArrayFromFile(char *filename, int *array, int *n, int *elemMinValue,
     return array;
 }
 
-char getStrDateTime(char *buffer, time_t *time)
+void getStrDateTime(char *buffer, time_t *time)
 {
     if (buffer == NULL) {
         return;

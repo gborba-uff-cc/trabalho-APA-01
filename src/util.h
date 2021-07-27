@@ -39,6 +39,6 @@ int *readIntArrayFromFile(char *filename, int *array, int *n, int *elemMinValue,
  * Buffer de entrada deve ser maior que 19 characteres
  * Formato de saída: YYYY-MM-DD_HH-MM-SS
  */
-char getStrDateTime(char *buffer, time_t *time);
+void getStrDateTime(char *buffer, time_t *time);
 
 #endif
