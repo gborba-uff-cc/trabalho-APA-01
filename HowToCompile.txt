@@ -1,3 +1,4 @@
+================================================================================
 Passos para compilar os programas usando o gcc no teminal linux
 
     Abra o terminal;
@@ -7,10 +8,11 @@ Passos para compilar os programas usando o gcc no teminal linux
     Entre com o bloco seguinte no terminal;
     (se copiar linha a linha, então copie tudo exceto as linhas com '---' e a última linha em branco)
     (se copiar o bloco então, copie tudo, incluindo a última linha em branco, exceto as linhas com '---')
---------------------
+----------------------------------------
 mkdir bin
 mkdir objects
 mkdir generatedArrays
+mkdir graphics
 mkdir results
 gcc src/heapsort.c -o objects/heapsort.o -c
 gcc src/ordenacaoMetodoCaixas.c -o objects/ordenacaoMetodoCaixas.o -c
@@ -25,9 +27,37 @@ gcc -o ../bin/tempoCpuHeapsort mainTempoCpuHeapsort.o heapsort.o ordenacaoMetodo
 gcc -o ../bin/geradorArrays mainGeradorArrays.o util.o
 cd ..
 
---------------------
+----------------------------------------
 
     Execute os programas no diretório bin/ com
 ./bin/tempoCpuCaixas
     E/Ou
 ./bin/tempoCpuHeapsort
+
+================================================================================
+Passos para plotar os gráficos com o gnuplot
+
+    Abra o terminal;
+
+    Abra (/navegue até) o diretório "trabalho-APA-01/results" no terminal;
+
+    execute o gnuplot com:
+gnuplot
+
+    no gnuplot entre com:
+        (nome de um arquivo para plotar deve ser o gerado pelos algoritmos de ordenação)
+        exemplo abaixo para visuaizar e armazenar uma imagem do gráfico
+----------------------------------------
+set terminal wxt size 800,600
+unset yrange
+unset xrange
+set key inside top left
+set title "Titulo"
+set ylabel "Tempo (s)"
+set xlabel "Tamanho da entrada"
+set xrange [0:26000]
+plot "meansCaixas-2021-07-26_21-51-28.dat" title "Metodo das Caixas" lt 7 lc 7 lw 2 w l, "meansHeapsort-2021-07-26_21-51-49.dat" title "Heapsort" lt 7 lc 0 lw 2 w l
+set terminal png enhanced size 800,600
+set output "../graphics/caixas-vs-heapsort.png"
+replot
+set terminal wxt
