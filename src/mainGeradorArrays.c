@@ -62,7 +62,7 @@ int main(int argc, char const *argv[])
 
     int i = 0;
     for (arraySize = arraySizeMinimum; arraySize <= arraySizeMaximum; arraySize += arraySizeStep) {
-        maxValue = arraySize;
+        maxValue = elemMaxValue;
         for (i = 0; i < nArraySeeds; i++) {
             arraySeed = arraySeeds[i];
             array = generateRandomIntArray(array, arraySize, elemMinValue, maxValue, arraySeed);

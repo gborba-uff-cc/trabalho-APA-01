@@ -96,7 +96,7 @@ int main(int argc, char const *argv[])
 
     // para cada um dos tamanhos de array
     for (arraySize = arraySizeMinimum; arraySize <= arraySizeMaximum; arraySize += arraySizeStep) {
-        maxValue = arraySize;
+        maxValue = elemMaxValue;
         dt_cpu_acc = 0.0;
         dt_kernel_acc = 0.0;
         // para cada tamanho de array, gera um array usando uma das seeds
