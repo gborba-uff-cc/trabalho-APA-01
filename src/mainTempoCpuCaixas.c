@@ -91,7 +91,7 @@ int main(int argc, char const *argv[])
     time_t startTime = time(NULL);
     char todayDate[20];
     getStrDateTime(todayDate, &startTime);
-    sprintf(outputFilename, "./results/meansCaixas-%s.dat", todayDate);
+    sprintf(outputFilename, "./results/meansCaixas_%s.dat", todayDate);
     fp = fopen(outputFilename, "a");
 
     // para cada um dos tamanhos de array
