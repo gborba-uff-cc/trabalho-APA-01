@@ -1,19 +1,18 @@
 #include <stdio.h>
 #include <limits.h>
 #include <time.h>
+#include <stdbool.h>
 
 #include "util.h"
 
 int main(int argc, char const *argv[])
 {
-    const int elemMinValue = 0;
-    const int elemMaxValue = 1000;
-    // const int arraySizeStep = 500;
-    // const int arraySizeMinimum = arraySizeStep;
-    // const int arraySizeMaximum = INT_MAX - arraySizeStep;
-    const int arraySizeStep = 100;
-    const int arraySizeMinimum = 1000;
-    const int arraySizeMaximum = 25000;
+    // valores padrão
+    int elemMinValue = 0;
+    int elemMaxValue = 1000;
+    int arraySizeStep = 100;
+    int arraySizeMinimum = 1000;
+    int arraySizeMaximum = 25000;
     const int arraySeeds[] = {2000, 566, 30610, 134, 2001};
     const int nArraySeeds = sizeof(arraySeeds)/sizeof(int);
 
@@ -26,6 +25,38 @@ int main(int argc, char const *argv[])
     int arraysCount = 0;
     time_t startTime = time(NULL);
     char todayDate[20];
+
+    bool paramsAreValids = true;
+    // tenta pegar parametros via argumentos do programa
+    if (getParamsFromArgs(argc, argv, &arraySizeMinimum, &arraySizeMaximum,
+        &arraySizeStep, &elemMinValue, &elemMaxValue)) {
+    }
+    // tenta pegar parametros do terminal, se não consegui via argumentos
+    else if (getParamsFromTerminal(&arraySizeMinimum, &arraySizeMaximum,
+        &arraySizeStep, &elemMinValue, &elemMaxValue)) {
+    }
+    // usa valores padrão se não não ceonseguiu pegar paramentros de outras formas
+    // faz validação parametros
+    paramsAreValids &= (0 <= arraySizeMinimum && arraySizeMinimum <= arraySizeMaximum);
+    paramsAreValids &= (0 <= arraySizeMaximum && arraySizeMaximum <= INT_MAX - 1);
+    paramsAreValids &= (INT_MIN <= arraySizeStep && arraySizeStep <= INT_MAX);
+    paramsAreValids &= (INT_MIN <= elemMinValue && elemMinValue <= INT_MAX);
+    paramsAreValids &= (INT_MIN <= elemMaxValue && elemMaxValue <= INT_MAX);
+    if (paramsAreValids == false) {
+        puts("Nenhum dos valores fornecidos são válidos");
+        return 1;
+    }
+
+    // apresenta os parametros que serão usados no programa
+    printf(
+"Valores que serão usados para gerar os arrays:\n\
+    tamanho mínimo:   %d\n\
+    tamanho máximo:   %d\n\
+    tamanho do passo: %d\n\
+    valor mínimo:     %d\n\
+    valor máximo:     %d\n",
+        arraySizeMinimum, arraySizeMaximum, arraySizeStep,
+        elemMinValue, elemMaxValue);
 
     int i = 0;
     for (arraySize = arraySizeMinimum; arraySize <= arraySizeMaximum; arraySize += arraySizeStep) {
