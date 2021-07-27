@@ -35,7 +35,7 @@ int main(int argc, char const *argv[])
     else if (getParamsFromTerminal(&arraySizeMinimum, &arraySizeMaximum,
         &arraySizeStep, &elemMinValue, &elemMaxValue)) {
     }
-    // usa valores padrão se não não ceonseguiu pegar paramentros de outras formas
+    // usa valores padrão se não não ceonseguiu pegar parametros de outras formas
     // faz validação parametros
     paramsAreValids &= (0 <= arraySizeMinimum && arraySizeMinimum <= arraySizeMaximum);
     paramsAreValids &= (0 <= arraySizeMaximum && arraySizeMaximum <= INT_MAX - 1);
