@@ -128,3 +128,37 @@ void getStrDateTime(char *buffer, time_t *time)
     }
     strftime(buffer, 20, "%Y-%m-%d_%H-%M-%S", localtime(time));
 }
+
+bool getParamsFromArgs(
+    int argc, char const *argv[],
+    int *nMin, int *nMax, int *nStep,
+    int *elemMinValue, int *elemMaxValue)
+{
+    int min = 0;
+    int max = 0;
+    int step = 0;
+    int minVal = 0;
+    int maxVal = 0;
+    bool fail = 0;
+
+    if (argc != 6) {
+        return false;
+    }
+
+    fail |= (sscanf(argv[1], "%d", &min) != 1);
+    fail |= (sscanf(argv[2], "%d", &max) != 1);
+    fail |= (sscanf(argv[3], "%d", &step) != 1);
+    fail |= (sscanf(argv[4], "%d", &minVal) != 1);
+    fail |= (sscanf(argv[5], "%d", &maxVal) != 1);
+
+    if(fail) {
+        return false;
+    }
+
+    *nMin = min;
+    *nMax = max;
+    *nStep = step;
+    *elemMinValue = minVal;
+    *elemMaxValue = maxVal;
+    return true;
+}

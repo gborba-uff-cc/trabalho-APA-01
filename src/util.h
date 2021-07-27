@@ -1,6 +1,8 @@
 #ifndef __UTIL_H_FILE__
 #define __UTIL_H_FILE__
 
+#include <stdbool.h>
+
 /** 
  * Tenta gerar dinâmicamente um novo array com n inteiros.
  *
@@ -40,5 +42,17 @@ int *readIntArrayFromFile(char *filename, int *array, int *n, int *elemMinValue,
  * Formato de saída: YYYY-MM-DD_HH-MM-SS
  */
 void getStrDateTime(char *buffer, time_t *time);
+
+/**
+ * Recupera os valores para tamanho mínimo, tamanho máximo, tamanho do passo,
+ * valor mínimo e valor máximo dos elementos passados como argumentos ao 
+ * programa.
+ *
+ * Retorna true caso tenha conseguido recuperar os valores, caso contrário false.
+ *
+ * Obs1.: Valores recuperados na ordem indicada.
+ * Obs2.: valores devem estar separados por ' ' espaço.
+ */
+bool getParamsFromArgs(int argc, char const *argv[], int *nMin, int *nMax, int *nStep, int *elemMinValue, int *elemMaxValue);
 
 #endif
