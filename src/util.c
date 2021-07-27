@@ -196,7 +196,7 @@ bool getParamsFromTerminal(
     fail |= (sscanf(line, "%d", &minVal) != 1);
     fputs("\n", stdout);
 
-    fputs("Entre o tamanho mínimo dos elementos: ", stdout);
+    fputs("Entre o valor máximo dos elementos: ", stdout);
     fgets(line, lineSize, stdin);
     fail |= (sscanf(line, "%d", &maxVal) != 1);
     fputs("\n", stdout);
