@@ -77,10 +77,12 @@ int main(int argc, char const *argv[])
     return 0;
 }
 
-// lê array 1 salvo no arquivo
+// lê array salvo no arquivo
 // int *arrayLido = NULL, nLido = 0, minValorLido = 0, maxValorLido = 0;
-// arrayLido = readIntArrayFromFile("./generatedArrays/1.txt", arrayLido, &nLido, &minValorLido, &maxValorLido);
+// char inputFilename[100];
+// sprintf(inputFilename, "./generatedArrays/%s_%d.txt", todayDate, 1);
+// arrayLido = readIntArrayFromFile(inputFilename, arrayLido, &nLido, &minValorLido, &maxValorLido);
 // if (arrayLido != NULL) {
-//     printf("%d, %d, %d\n", nLido, minValorLido, maxValorLido);
+//     printf("Número de elementos:%d, Valor Mínimo: %d, Valor Máximo: %d\n", nLido, minValorLido, maxValorLido);
 //     printIntArray(arrayLido, nLido);
 // }
