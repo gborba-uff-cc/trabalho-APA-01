@@ -46,7 +46,7 @@ gnuplot
 
     no gnuplot entre com:
         (nome de um arquivo para plotar deve ser o gerado pelos algoritmos de ordenação)
-        exemplo abaixo para visuaizar e armazenar uma imagem do gráfico
+        abaixo, exemplo para visualizar e armazenar uma imagem do gráfico
 ----------------------------------------
 set terminal wxt size 800,600
 unset yrange
@@ -57,7 +57,7 @@ set ylabel "Tempo (s)"
 set xlabel "Tamanho da entrada"
 set xrange [0:26000]
 plot "meansCaixas-2021-07-26_21-51-28.dat" title "Metodo das Caixas" lt 7 lc 7 lw 2 w l, "meansHeapsort-2021-07-26_21-51-49.dat" title "Heapsort" lt 7 lc 0 lw 2 w l
-set terminal png enhanced size 800,600
+set terminal pngcairo enhanced size 800,600
 set output "../graphics/caixas-vs-heapsort.png"
 replot
 set terminal wxt
